@@ -23,6 +23,22 @@ class Person {
   }
 }
 
+//class baru dengan METHOD EXPRESSION BODY
+class ComputerClass {
+  // biasanya kan gini:
+  // void startup(){
+  //   print("computer is starting");
+  // }
+  // bisa kita persingkat dengan jadi gini:
+  void startup() => print("Computer is starting");
+
+  void shutdown() => print('Computer is shutting down');
+
+  //kalau method expression body dengan return value
+  String getOperatingSystem() => "linux";
+  //"linux" di sini adalah nilai return value nya.
+}
+
 void main() {
   /**
    * METHOD
@@ -35,9 +51,24 @@ void main() {
 
   //panggil method
   var person = Person();
-  person.nickname = 'Mizu';
-  person.sayHello('Sulthon');
+  person.nickname = 'Mizu'; //akan memanipulasi data field nya.
+  person.sayHello(
+    'Sulthon',
+  ); //akan dimasukkan dalam parameter method function nya.
 
   person.hi('bro!');
-  person.getName();
+  person.getName(); //panggil doang
+
+  print('===========');
+
+  /**
+   * METHOD EXPRESSION BODY
+   * kadang kita pengen buat method cuma pake 1 baris code kan,
+   * kita bisa pake expression body kalo mau bikin method yang sederhana.
+   * expression body mirip kaya kita bikin anonymous function.
+   */
+  var computer = ComputerClass();
+  computer.startup();
+  computer.shutdown();
+  print(computer.getOperatingSystem());
 }
