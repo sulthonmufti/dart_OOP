@@ -47,4 +47,21 @@ void main() {
   print(orang1.name); //gunakan .namaField nya,  jadi variable.field
   print(orang1.address);
   print(orang1.country);
+
+  print('==========');
+
+  /**
+   * MANIPULASI FIELD
+   * field yang ada di object bisa kita manipulasi, tergantung final atau bukan.
+   * kalau final, berarti data field nya tidak bisa kita ubah, tapi kalau tidak kita bisa ubah data field nya.
+   * cara manupulasi data field sama kaya variable.
+   * buat mengakses field kita butuh kunci .(titik) setelah nama object dan diikuti nama field nya.
+   */
+  orang1.name =
+      'Muhammad Sulthon Mufti'; //note: kalau datanya fieldnya tidak boleh null, maka tidak bisa masukkan null pada saat manipulasi datanya.
+  orang1.address = 'Central Java';
+  //orang1.country = 'England'; //data tidak dapat dimanipulasi karena datanya bersifat final.
+  print(orang1.name);
+  print(orang1.address);
+  print(orang1.country);
 }
