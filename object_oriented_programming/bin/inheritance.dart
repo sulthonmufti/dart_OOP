@@ -10,7 +10,7 @@ class Manager {
 }
 
 //Class Child
-class vicePresident extends Manager {
+class VicePresident extends Manager {
   String? gender;
 }
 
@@ -28,7 +28,7 @@ void main() {
 
   manager.sayHello('Sulthon');
 
-  var vp = vicePresident();
+  var vp = VicePresident();
   vp.name = 'Makoto';
   vp.sayHello('Shina');
   vp.gender = 'Man';
