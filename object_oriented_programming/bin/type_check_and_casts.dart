@@ -21,6 +21,22 @@ void sayHello(Employee employee) {
   print('Hello ${employee.name}');
 }
 
+//METHOD UNTUK TYPE CHECK AND CASTS
+void typeCheck(Employee employee) {
+  //pengecekan, kalau employee nya type VicePresident maka, ... 
+  if (employee is VicePresident) {
+    //maka akan melakukan konversi employee as VicePresident, lalu kita simpan di vicePresident
+    VicePresident vicePresident = employee as VicePresident;
+    print('Hello Vice President ${vicePresident.name}');
+
+    //pengecekan, kalau employee nya type Manager maka, ... (konversi employee as Manager)
+  } else if (employee is Manager) {
+    Manager manager = employee as Manager;
+    print('Hello Manager ${manager.name}');
+  } else {
+    print('Hello ${employee.name}');
+  }
+}
 
 void main() {
   /**
@@ -52,4 +68,12 @@ void main() {
 
   print('===========');
 
+  /**
+   * TYPE CHECK AND CASTS
+   * saat menggunkan polimorfisme, kadang kita mau melakukan konversi tipe data ke tipe data aslinya
+   * tapi supaya aman, sebelum ngelakuin konversi, pastiin kalo kita ngelakuin type check (pengecekan tipe data), dengan menggunakan kata kunci is.
+   * hasil operator is adalah boolean, true jika tipe data sesuai, false jika tidak sesuai.
+   * untuk melakukan konversi tipe data Object, kita bisa gunain kata kunci 'as'
+   */
+  typeCheck(employee);
 }
