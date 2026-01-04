@@ -23,7 +23,7 @@ void sayHello(Employee employee) {
 
 //METHOD UNTUK TYPE CHECK AND CASTS
 void typeCheck(Employee employee) {
-  //pengecekan, kalau employee nya type VicePresident maka, ... 
+  //pengecekan, kalau employee nya type VicePresident maka, ...
   if (employee is VicePresident) {
     //maka akan melakukan konversi employee as VicePresident, lalu kita simpan di vicePresident
     VicePresident vicePresident = employee as VicePresident;

@@ -59,4 +59,15 @@ void main() {
 
   print(category1.hashCode); //hashCode nya sama karena isinya sama
   print(category2.hashCode);
+
+  print('===========');
+
+  var category4 = Category("1", "Electronics");
+  var category5 = Category("2", "TV");
+
+  print(category4 == category5); //false karena isi nya berbeda
+  print(category4 == category5);
+
+  print(category4.hashCode); //hashCode nya beda karena isinya berbeda
+  print(category5.hashCode);
 }
