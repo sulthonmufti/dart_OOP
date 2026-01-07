@@ -5,6 +5,15 @@ class Application {
   static final String name = "Belajar Pemrograman Dart";
 }
 
+//NOTE: biasanya kalo kita bikin static emang dibikin final juga agar tidak bisa dirubah,
+//      karena akan menimbulkan masalah di kemudian hari kalau bisa data field static nya bisa diubah ubah.
+
+//static method
+class Math {
+  //static method
+  static int sum(int first, int second) => first + second;
+}
+
 void main() {
   /**
    * static = sebuah kata kunci yang digunain untuk membuat field dan method yang bisa-
@@ -23,4 +32,16 @@ void main() {
   //biasanya kan harus (contoh) "var aplication = Application;" dulu, kalo ini engga
   print(Application.name);
   print(Application.author);
+
+  print("==========");
+
+  /**
+   * STATIC METHOD
+   * kalu kita buat static dalam sebuah method, maka secara otomatis method itu bisa-
+   * diakses juga sama semuanya tanpa kita harus buat object dari class nya.
+   * makanya biasanya kalau kita buat static method tuh buat utility atau method helper/method yang digunakan untuk membantu-
+   * jadi gausah harus bikin object nya.
+   */
+  var result = Math.sum(10, 10);
+  print(result);
 }
