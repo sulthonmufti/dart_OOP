@@ -1,4 +1,7 @@
 //membuat exception, tanpa membuat class exception
+import 'dart:async';
+import 'dart:ffi';
+
 class Validation {
   static void validate(String username, String password) {
     if (username == "") {
@@ -27,6 +30,26 @@ class Validation2 {
       throw ValidationException("Name is blank");
     } else if (pass == "") {
       throw ValidationException("Pass is blank");
+    }
+  }
+}
+
+//multiple try catch
+class LoginCheck implements Exception {
+  //field
+  String error;
+
+  LoginCheck(this.error);
+}
+
+class ValidationLogin {
+  static void valid(String usernameid, String passwordid) {
+    if (usernameid == "") {
+      throw LoginCheck("Username field is blank");
+    } else if (passwordid == "") {
+      throw LoginCheck("Password must be filled!");
+    } else if (usernameid == "Mufti" || passwordid == "123") {
+      throw LoginCheck("Login failed, try again!");
     }
   }
 }
@@ -75,4 +98,109 @@ void main() {
   }
 
   print("program tidak berhenti");
+
+  print("==========");
+
+  //kalau mau menangkap object exception nya
+  // try {
+  //   Validation2.validate2("", "");
+  // } on ValidationException catch (exception) {
+  //   print("Error : ${exception.message}");
+  // }
+
+  //bagaimana kalo kita manggil sebuah method yang berkemungkinan untuk multiple error,
+  //kita bisa menggunakan multiple try catch
+  try {
+    ValidationLogin.valid("Mufti", "111");
+  } on LoginCheck catch (exception) {
+    print("Error : ${exception.error}"); //sampai sini sebenernya udah bisa-
+
+    //tapi kalau kondisi di atas tidak tertangani tambahin lagi exception (handle semuanya)
+  } on Exception catch (exception) {
+    print("Error : ${exception.toString()}");
+  }
+
+  print("program tidak berhenti");
+
+  print("==========");
+
+  /**
+   * FINALLY
+   * dalam try-catch, kita bisa nambahin block finally
+   * block finally ini adalah block dimana akan selalu dieksekusi baik terjadi exception atau engga.
+   * ini sangat cocok wakti kita mau lakuin sesuatu, ga peduli sukses apa gagal.
+   */
+  try {
+    ValidationLogin.valid("Mufti", "111");
+  } on LoginCheck catch (exception) {
+    print("Error : ${exception.error}"); //sampai sini sebenernya udah bisa-
+
+    //tapi kalau kondisi di atas tidak tertangani tambahin lagi exception (handle semuanya)
+  } on Exception catch (exception) {
+    print("Error : ${exception.toString()}");
+  } finally {
+    print(
+      "Program selesai",
+    ); //finally ini entah bakal error (exception) apa engga, bakal tetap dieksekusi
+  }
+
+  print("==========");
+
+  /**
+   * TRY CATCH SEMUA EXCEPTION
+   * kadang kita ga terlalu peduli sama jenis class Exception.
+   * pada kasus kaya gini, kita bisa ga nyebutin class nya waktu melakukan try-catch
+   */
+  try {
+    ValidationLogin.valid("Mufti", "111");
+  } on LoginCheck catch (exception) {
+    print("Error : ${exception.error}");
+
+    //di sini kita gausah tambahin on Exceptio, lansung tangkap saja exceptionnya
+  } catch (exception) {
+    print("Error : ${exception.toString()}");
+  } finally {
+    print("Program selesai");
+  }
+
+  print("==========");
+
+  /**
+   * STACK TRACE
+   * waktu kita menangkap exception, object exception ga punya informasi posisi atau lokasi-
+   * terjadinya error.
+   * jika kita mau tau posisi atau lokasi terjadinya error, kita bisa nambahin-
+   * parameter kedua pada catch.
+   * secara otimatis parameter kedau itu adalah sebuah object Stack Trace.
+   * detail : https://api.dart.dev/stable/2.14.4/dart-core/StackTrace-class.html
+   */
+  try {
+    ValidationLogin.valid("Mufti", "111");
+  } on LoginCheck catch (exception, stackTrace) {
+    print("Error : ${exception.error}");
+    //akan keluat detail dari error exceptionnya (baris error dll)
+    print("Stack Trace : ${stackTrace.toString()}");
+  } catch (exception, stackTrace) {
+    print("Error : ${exception.toString()}");
+    print("Stack Trace : ${stackTrace.toString()}");
+  } finally {
+    print("Program selesai");
+  }
+
+  print("==========");
+
+  /**
+   * ERROR
+   * selain exception, ada jenis kesalahan lagi yaitu Error.
+   * berbeda sama exception, error adalah kesalahan yang harus dihindarin, dan-
+   * jika terjadi lebih baik segera hentikan programnya.
+   * error bisa terjadi karena ada kesalahan pada kode program kita.
+   * contoh, kita mengakses index yang salah di List.
+   * detail : https://api.dart.dev/stable/2.14.4/dart-core/Error-class.html
+   */
+  var list = ["Muhammad", "Sulthon", "Mufti"];
+
+  //akan error, karena kita akses list[10] padahal cumana ada 3 data.
+  //harusnya kita lakuin validasi dulu sebelum mengaksesnya.
+  print(list[10]);
 }
